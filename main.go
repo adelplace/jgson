@@ -25,7 +25,9 @@ func main() {
 			indentLevel--
 			indent(indentLevel)
 		case ' ':
-			continue
+			if !inText {
+				continue
+			}
 		case '"':
 			if ignore {
 				break
