@@ -24,7 +24,7 @@ func main() {
 			eol()
 			indentLevel--
 			indent(indentLevel)
-		case ' ':
+		case ' ', '\n', '\t':
 			if !inText {
 				continue
 			}
