@@ -3,16 +3,28 @@ package main
 import (
 	"fmt"
 	"os"
+	"bufio"
+	"io"
 )
 
 func main() {
-	json := os.Args[1]
+	reader := bufio.NewReader(os.Stdin)
+	var json []rune
+
+	for {
+		input, _, err := reader.ReadRune()
+		if err != nil && err == io.EOF {
+			break
+		}
+		json = append(json, input)
+	}
 
 	indentLevel := 0
 	inText := false
 	inValue := false
 	ignore := false
-	for _, char := range json {
+	for j := 0; j < len(json); j++ {
+		char := json[j]
 		switch char {
 		case ':':
 			space()
