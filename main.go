@@ -21,7 +21,6 @@ func main() {
 
 	indentLevel := 0
 	inText := false
-	inValue := false
 	ignore := false
 	for j := 0; j < len(json); j++ {
 		char := json[j]
@@ -48,7 +47,6 @@ func main() {
 			inText = !inText
 			if !inText {
 				endColor()
-				inValue = false
 			}
 		}
 
@@ -59,13 +57,11 @@ func main() {
 			eol()
 			indentLevel++
 			indent(indentLevel)
-			inValue = false
 		case ',':
 			eol()
 			indent(indentLevel)
 		case ':':
 			space()
-			inValue = true
 		case '[':
 			eol()
 			indentLevel++
@@ -75,11 +71,7 @@ func main() {
 				break
 			}
 
-			if inValue {
-				beginGreenColor()
-			} else {
-				beginBlueColor()
-			}
+			beginGreenColor()
 		}
 
 		if char == '\\' {
